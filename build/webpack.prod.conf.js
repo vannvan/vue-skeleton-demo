@@ -10,6 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')  //骨架屏
+
 
 const env = require('../config/prod.env')
 
@@ -121,7 +123,15 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    //骨架屏新增
+    new SkeletonWebpackPlugin({
+        webpackConfig: {
+            entry: {
+                app: ('./src/entry-skeleton.js')
+            }
+        }
+    })
   ]
 })
 
